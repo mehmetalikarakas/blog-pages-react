@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
   const [baslik, setBaslik] = useState("");
   const [aciklama, setAciklama] = useState("");
   const [yazar, setYazar] = useState("");
   const [yukleniyor, setYukleniyor] = useState(false);
+
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,8 +19,10 @@ const Create = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(yazi),
     }).then(() => {
-      console.log("yazi eklemdi");
+      console.log("yazi eklendi");
       setYukleniyor(false);
+      //   history.go(-1)
+      history.push("/");
     });
   };
 
